@@ -1,0 +1,11 @@
+image = "<path to a PyTorch NGC based image>"
+
+mounts = ["<the current working directory containing the .py script>:/scratch"]
+
+workdir = "/scratch"
+
+[annotations]
+com.hooks.aws_ofi_nccl.enabled = "true"
+com.hooks.aws_ofi_nccl.variant = "cuda12"
+
+
