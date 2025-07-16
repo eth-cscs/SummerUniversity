@@ -57,7 +57,7 @@ if __name__ == '__main__':
         global_rank = node_rank * num_devices_per_node + i
         t = multiprocessing.Process(
             target=perform_all_reduce,
-            args=(local_rank,  global_rank, unique_id, world_size, array_size)
+            args=(local_rank, global_rank, unique_id, world_size, array_size)
             )
         procs.append(t)
      
