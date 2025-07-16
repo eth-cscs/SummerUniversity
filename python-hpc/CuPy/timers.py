@@ -38,6 +38,6 @@ def cpu_timer(log=False):
     start = default_timer()
     yield timer
     end = default_timer()
-    timer.elapsed_time = end - start
+    timer.elapsed_time = (end - start) * 1000
     if log:
         print(f'Elapsed time: {(end - start) * 1000} ms')
