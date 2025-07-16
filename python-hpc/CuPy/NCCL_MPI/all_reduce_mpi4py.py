@@ -26,5 +26,4 @@ if __name__ == '__main__':
             stream.synchronize()
             mpi_comm.Allreduce(x, y)
 
-        stream.synchronize()
         print(f'Rank: {rank} -> {y.mean()}')
