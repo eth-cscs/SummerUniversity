@@ -1,4 +1,4 @@
-image = "<path to a PyTorch NGC based image>"
+image = "/capstor/store/cscs/cscs/jupyter/pytorch/pytorch-summer-university-25.05-py3.sqsh"
 
 mounts = ["<the current working directory containing the .py script>:/scratch"]
 
