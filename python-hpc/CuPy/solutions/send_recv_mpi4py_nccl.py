@@ -52,7 +52,6 @@ def perform_send_recv(local_rank, global_rank, comm, world_size,
 
                 stream.synchronize()
         bandwidth = (x.nbytes / 1024 ** 3) * 1000.0 /  timer.elapsed_time
-        #print(f'Rank: {global_rank} -> {y.mean()}: {bandwidth} GB/s')
         return bandwidth
 
 if __name__ == '__main__':

@@ -83,3 +83,41 @@ for i in range(11):
 
     bandwidth = device_array.nbytes * CYCLES / (1024 ** 3) / timer.elapsed_time * 1000
     print(f'{2**i:4d}MB -> {bandwidth:4.2f} GB/s')
+
+
+print('Running benchmark for D0 -> D0')
+
+for i in range(13):
+    device_array = cp.zeros(shape=1024 * 1024 * 2 ** i, dtype=cp.byte)
+    device_array2 = cp.zeros(shape=1024 * 1024 * 2 ** i, dtype=cp.byte)
+    
+    # Warmup
+    device_array2[:] = device_array[:] 
+    cp.cuda.get_current_stream().synchronize()
+     
+    with cupy_timer() as timer:
+        for c in range(CYCLES):
+            device_array2[:] = device_array[:]
+
+    bandwidth = device_array.nbytes * CYCLES / (1024 ** 3) / timer.elapsed_time * 1000
+    print(f'{2**i:4d}MB -> {bandwidth:4.2f} GB/s')
+
+
+print('Running benchmark for D0 -> D1')
+
+for i in range(13):
+    with cp.cuda.Device(0):
+        device_array = cp.zeros(shape=1024 * 1024 * 2 ** i, dtype=cp.byte)
+    with cp.cuda.Device(1):
+        device_array2 = cp.zeros(shape=1024 * 1024 * 2 ** i, dtype=cp.byte)
+    
+    # Warmup
+    device_array2[:] = device_array[:] 
+    cp.cuda.get_current_stream().synchronize()
+     
+    with cupy_timer() as timer:
+        for c in range(CYCLES):
+            device_array2[:] = device_array[:]
+
+    bandwidth = device_array.nbytes * CYCLES / (1024 ** 3) / timer.elapsed_time * 1000
+    print(f'{2**i:4d}MB -> {bandwidth:4.2f} GB/s')
